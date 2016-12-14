@@ -1,0 +1,28 @@
+https://www.google.be/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0CCQQFjAA&url=http%3A%2F%2Fwww.mdpi.com%2F1424-8220%2F2%2F7%2F244%2Fpdf&ei=nVGNVOvhHouuUfSIgLgE&usg=AFQjCNEr-ZuiIFhR8RSKsg-6Ov2bDvAxSw&sig2=t-FuLaeOXEVIJzpb4JnzXw&bvm=bv.81828268,d.d24&cad=rja
+--> sensors-02-00244.pdf
+
+http://www.iop.org/education/teacher/resources/teaching-medical-physics/pulse/file_56276.pdf
+http://www.howequipmentworks.com/physics/respi_measurements/oxygen/oximeter/pulse_oximeter.html
+http://www.uzleuven.be/ig-endocrinologie/hyperglycemie
+http://www.uzleuven.be/node/11291
+http://www.gezondheid.be/INDEX.cfm?fuseaction=art&art_id=2303
+http://www.rp-photonics.com/ultraviolet_light.html
+http://link.springer.com/article/10.1007/BF01617328#page-1
+http://journals.lww.com/anesthesiology/Citation/1992/06000/Recent_Developments_in_Pulse_Oximetry_.24.aspx
+http://www.altmedrev.com/publications/11/4/278.pdf
+
+Gezin&Gezondheid Deel 1 en 2
+Geriatrie, Dagelijkse praktijk Deel 2
+Wavelength Selection for Low-Saturation Pulse Oximetry (ieee, Paul D. Mannheimer, James R. Casciani, Michael E. Fein, and Steven L. Nierlich)
+An introduction to I2C and SPI protocols (ieee, Frédéric Leens)
+Sunlight UV-induced skin cancer relies upon activation of the p38α signaling pathway (Cancer Research, Kangdong Liu, Donghoon Yu, Yong-Yeon Cho, Ann M. Bode, Weiya Ma, Ke Yao, Shengqing Li, Jixia Li, G. Tim Bowden, Ziming Dong, and Zigang Dong)
+
+IMAGES
+http://blackfin.uclinux.org/lib/exe/fetch.php?media=linux-kernel:drivers:sport_uart.png
+http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#mediaviewer/File:SPI_three_slaves.svg
+http://www.totalphase.com/support/article_attachments/200093557/i2c-diagram.png
+http://www.ibiblio.org/kuphaldt/electricCircuits/Digital/04256.png
+http://www.howequipmentworks.com/images/physics_images/respi_gases_images/oxygen_images/pulse_oxi_images/conc_absorb.gif
+https://cdn.sparkfun.com/r/500-500/assets/0/d/f/d/0/HeartRate_Normal.png
+http://www.analog.com/library/analogdialogue/archives/43-07/AD43_07_FIG-04.jpg
+http://bestuv.com/wp-content/uploads/2011/07/uv-damage-overview-image.jpg

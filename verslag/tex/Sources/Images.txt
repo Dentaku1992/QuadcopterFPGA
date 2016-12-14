@@ -1,0 +1,62 @@
+@online{pict1,
+ author  = "BlackFin",
+ title   = "UART",
+ urlseen = "22-10-2014",
+ url     = "http://blackfin.uclinux.org/lib/exe/fetch.php?media=linux-kernel:drivers:sport_uart.png",
+}
+
+@online{pict2,
+ author  = "BlackFin",
+ title   = "SPI",
+ urlseen = "22-10-2014",
+ url     = "http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#mediaviewer/File:SPI_three_slaves.svg",
+}
+
+@online{pict3,
+ author  = "TotalPhase",
+ title   = "I\textsuperscript{2} C",
+ urlseen = "22-10-2014",
+ url     = "http://www.totalphase.com/support/article_attachments/200093557/i2c-diagram.png",
+}
+
+@online{pict4,
+ author  = "iBiblio",
+ title   = "ADC",
+ urlseen = "22-10-2014",
+ url     = "http://www.ibiblio.org/kuphaldt/electricCircuits/Digital/04256.png",
+}
+
+@online{pict5,
+ author  = "How Equipment Works",
+ title   = "Lght absorption by Hemoglobine",
+ urlseen = "12-11-2014",
+ url     = "http://www.howequipmentworks.com/images/physics_images/respi_gases_images/oxygen_images/pulse_oxi_images/conc_absorb.gif",
+}
+
+@online{pict6,
+ author  = "Sparkfun",
+ title   = "HeatRate with an AD8232",
+ urlseen = "7-11-2014",
+ url     = "https://cdn.sparkfun.com/r/500-500/assets/0/d/f/d/0/HeartRate_Normal.png",
+}
+
+@online{pict7,
+ author  = "Analog Devices",
+ title   = "Acceleration change curves during the process of falling",
+ urlseen = "7-11-2014",
+ url     = "http://www.analog.com/library/analogdialogue/archives/43-07/AD43_07_FIG-04.jpg",
+}
+
+@online{pict8,
+ author  = "Unknown",
+ title   = "UV Dagmage Overview",
+ urlseen = "9-12-2014",
+ url     = "http://bestuv.com/wp-content/uploads/2011/07/uv-damage-overview-image.jpg",
+}
+
+@online{pict9,
+ author  = "Unknown",
+ title   = "Bluetooth Low Energy Channels",
+ urlseen = "12-9-2014",
+ url     = "http://flyingcarsandstuff.com/uploads/2014/02/BLE-bands.jpg",
+}

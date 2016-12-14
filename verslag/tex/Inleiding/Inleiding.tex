@@ -1,0 +1,146 @@
+\chapter{Inleiding}
+	
+	\par In dit verslag worden de resultaten van het projectlab toegelicht. Elke stap die werd genomen om het eindresultaat te bekomen wordt kort besproken, alsook de moeilijkheden die zich hebben voorgedaan tijdens de ontwikkeling. Tenslotte wordt ook een besluit gevormd over het gehele project en worden de toekomstmogelijkheden kort toegelicht. 
+
+	\section{Omschrijving van de opdracht}
+
+		\par Het project is onderverdeeld in twee grote onderdelen. Enerzijds is er het stabilisatiealgoritme voor de quadcopter en anderzijds is er de sturing, hardware design en optical flowintegratie. De focus van het project zal gelegd worden op de stabiliteitsnelheid van het eindresultaat. Het onderdeel met het stabilisatie-algoritme omvat het genereren van PWM signalen die de motoren aansturen. Hiervoor is sensordata nodig van bijvoorbeeld een gyroscoop, accelerometer, magnetometer en barometer. Om de ruis uit deze metingen weg te filteren zal gebruik gemaakt worden van een filter, bijvoorbeeld Kalman, die ook in de FPGA zal ge\"integreerd worden. Naast data van sensoren zal de FPGA ook informatie ontvangen van een extra processor. Op deze extra processor wordt de communicatie met de grond voorzien (besturing), alsook een optical flow algoritme. 
+
+		\par De stabilisatie zelf zal uitgevoerd worden door een PID of SM (sliding mode) dat ook op de FPGA zal ge\"integreerd worden. De instellingen van het stabilisatie-algoritme zullen gemaakt worden door middel van registers die door de externe processor kunnen ingesteld worden via I\textsuperscript{2}C of SPI. Via deze registers kan ook de actuele sensor- en systeeminformatie opgevraagd worden. De hardware bestaat uit een zelf te ontwikkelen printplaat gebaseerd op een FPGA (Spartan 6) die de stabilisatie en verwerking van de inputs verzorgt. Daarnaast bevat het ook een microcontroller die de communicatie voorziet, alsook de beeldverwerking voor de optical flow en het batterijbeheer. De communicatie zou verlopen volgens het MAVLink protocol, een gestandaardiseerd protocol dat communicatie voorziet onafhankelijk van de fysische laag waarop dit gebeurt. Een keuze voor het beste kanaal maakt ook deel uit van dit project. 
+\newpage
+		\par Optical flow detectie voorziet de  mogelijkheid om de horizontale ongewenste bewegingen tegen te werken en dus de quadcopter op een vaste positie te houden. De sturing voor de BLDC motoren wordt zelf ge\"implementeerd en vindt plaats op externe processoren die elk instaan voor \'e\'en enkele motor. Het FPGA ontwikkelbord waarmee gewerkt zal worden is het Mojo bord met een Spartan 6 processor. Dit bord zal zelf aangekocht worden. Verder zal ook een MPU9250 gebruikt worden om accelero-, magneto- en gyro-data te verzamelen. De andere sensoren die gebruikt zullen worden dienen te worden bepaald tijdens de looptijd van het project. 
+
+		\par Wanneer alle sensoren getest zijn, worden ze samen met de FPGA (niet het ontwikkelbord) op de zelf ontworpen printplaat geplaatst om zo een quadcoptersturing te verkrijgen die onafhankelijk is van een ontwikkelbord of opgelegde pinout. Deze wordt gemonteerd op de quadcopter structuur die gemaakt zal worden door middel van een 3D printer. Dit maakt het nadien ook mogelijk om bij een crash een bepaald onderdeel snel te reproduceren.
+
+		\par Dit projectlab kan worden opgesplitst in verschillende milestones.
+			
+		\begin{itemize}
+			\item  Stabilisatie en sturing (Gert-Jan)
+				\begin{itemize}
+					\item Uitlezen sensoren
+					\item Uitfilteren van ruis op sensordata
+					\item Stabilisatie-algoritme PID/SM
+					\item Instellingsmogelijkheid van registers
+					\item Ontwerp van quadcopterframe
+				\end{itemize}
+			\item  Hardware en optical flow (Nick)
+				\begin{itemize}
+					\item Ontwerpen printplaat
+					\item Implementeren MAVLink
+					\item Selecteren communicatiekanaal
+					\item Optical flow
+					\item BLDC motor sturing
+					\item Return to home functie
+				\end{itemize}
+		\end{itemize}
+\newpage
+	\section{Planning en werkwijze}
+
+		\par De algemene werkwijze van het project kan onderverdeeld worden in vier grote blokken.
+
+			\begin{description}
+				
+				\item[Onderzoek:] In deze fase van het project wordt een onderzoek uitgevoerd met betrekking tot quadcopters. Er wordt gekeken naar hoe een quadcopter bestuurd wordt en via welke algoritmen dit kan gebeuren. Daarnaast zal ook een studie gemaakt worden naar het implementeren van een PID-controller in een FPGA. Via simulaties in het programma simulink kunnen de algoritmen ge\"evalueerd worden.
+
+				\item[Implementatie:] In deze fase worden de onderzoeksresultaten omgezet in code. Via het programma Xilinx ISE en Vivado wordt de implementatie voorzien op een FPGA. Aan de hand van het programma Modelsim worden de hardwaredesigns ge\"evalueerd alvorens deze op de FPGA worden getest.
+
+				\item[Testen:] Wanneer de hardware gevalideerd is door middel van een testbench, kan deze getest worden op de FPGA zelf. Blok per blok zullen de nodige testen uitgevoerd worden en bijgestuurd waar nodig. 
+
+				\item[Reflectie:] Elk ontworpen blok zal onderworpen worden aan een kritische evaluatie. Hierbij wordt gekeken naar performantie, accuraatheid en werking binnen het geheel. Waar nodig wordt bijgestuurd. Regelmatige communicatie met medestudent Nick, die de hardware (PCB) ontwerpt is hierbij nodig.
+
+			\end{description}
+
+		\par Een beknopte projectplanning wordt hieronder weergegeven. Een uitgebreide versie hiervan is terug te vinden in appendix \ref{app:A} op pagina \pageref{app:A}. Deze uitgebreide versie houdt rekening met de initi\"ele planning. Hieronder is het werkelijke verloop van het project weergegeven.
+
+			\begin{itemize}
+				
+				\item[Week 1:] 
+					\begin{itemize}
+						\item Keuze maken van het project uit de aangeboden projecten.  
+						\item Registreren van het gekozen project.
+					\end{itemize}
+
+				\item[Week 2:] 
+					\begin{itemize}
+						\item Indienen van de projectplanning.
+						\item Onderzoek naar quadcopters en besturing.
+						\item Studie PID en digitalisering.
+						\item Studie IMU sensoren.
+					\end{itemize}
+
+				\item[Week 3:]
+					\begin{itemize}
+						\item Simulatie van PID algoritme in Matlab en Simulink.
+						\item Theoretisch ontwerp van PID door middel van DSP48 slices.
+						\item Kennismaking Mojo ontwikelbord en Xilinx ISE.
+					\end{itemize}				
+
+				\item[Week 4:]
+					\begin{itemize}
+						\item Tussentijdse presentatie van het project.
+						\item Implementatie van PID door middel van DSP48 slices .
+						\item Evaluatie van PID implementatie en bijsturing.
+						\item Ontwerp van quadcopter frame in Inventor.
+					\end{itemize}					
+
+				\item[Week 5:]
+					\begin{itemize}
+						\item Ontwerp SPI slave interface in VHDL.
+						\item Bijsturen PID ontwerp, implementatie met behulp van IP core multiplier.
+						\item Validatie van ontwerp door middel van testbenches.
+
+					\end{itemize}					
+
+				\item[Week 6:]
+					\begin{itemize}
+						\item Bijsturen PID ontwerp, implementatie met behulp van IP core multiplier.
+						\item Validatie van ontwerp door middel van testbenches.
+						\item Ontwerp SPI slave interface aanpassen aan Mojo SPI.
+						\item Testprint van quadcopter arm en stevigheidstest.
+					\end{itemize}					
+
+				\item[Week 7:]
+					\begin{itemize}
+						\item Bijsturen ontwerp van quadcopter arm.
+						\item Printen van vier quadcopterarmen.
+						\item Ontwerp van PWM generator in VHDL.
+					\end{itemize}					
+
+				\item[Week 8:]
+					\begin{itemize}
+						\item Tussentijdse presentatie van het project.
+						\item Testen PWM generator op Mojo. 
+						\item Testen van SPI slave interface op Mojo. 
+						\item Ontwerp bijsturen waar nodig.
+					\end{itemize}					
+
+				\item[Week 9:]
+					\begin{itemize}
+						\item PID regeling aanpassen naar multiplexing om resources te besparen op de FPGA.
+						\item Valideren van het nieuwe PID ontwerp.
+						\item Testen van PWM en SPI samen op Mojo bord.
+					\end{itemize}					
+
+				\item[Week 10:]
+					\begin{itemize}
+						\item Ontwerpen van motormixingalgoritme in VHDL.
+						\item Optimalisatie van PID controller.
+						\item Implementatie van registers.
+					\end{itemize}					
+
+				\item[Week 11:]
+					\begin{itemize}
+						\item Labobad Gent.
+					\end{itemize}					
+
+				\item[Week 12:]
+					\begin{itemize}
+						\item Eindpresentatie en demo van het labproject.
+					\end{itemize}								
+
+				\item[Week 14:]
+					\begin{itemize}
+						\item Indienen van het eindverslag.
+					\end{itemize}
+
+			\end{itemize}

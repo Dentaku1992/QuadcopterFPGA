@@ -1,0 +1,55 @@
+AA, Anonieme Alcoholiekers
+SoC, System on Chip
+BLE, Bluetooth Low Energy
+HCI, Host Controller Interface
+EDR, Enhanced Data Rate
+GFSK, Gaussian Frequency Shift Keying
+GMSK, Gaussian Middle Shift Keying
+KU, Katholieke Universiteit
+SIG, Special Interest Group
+KUL, Katholieke Universiteit Leuven
+dBm, Decibel t.o.v. 1 milliwatt
+DAS, Data Acquisitie Systeem
+N.V., Naamloze Venootschap
+GSM, Global System for Mobile
+IBM, International Business Machines
+RS-232, Recommended Standard 232
+Mbps, Megabit per seconde
+L2CAP, Logical Link Control and Adaptation
+GHz, Giga Herrtz
+WIFI, Wireless Fidelity
+Kbps, Kilobits per seconde 
+PCB, Printed Circuit Board
+BR/EDR, Basic Rate/Enhanced Data Rate 
+IC, Integrated circuit
+UART, Universal Asynchronous Receiver Transmitter
+USB, Universal Serial Bus
+SPI, Serial Peripheral Interface
+ISM, Industrial Scientific Medical band
+FSK, Frequency Shift Keying
+CRC, Cyclic redundancy check
+AES, Advanced Encryption Standard
+MAC, Media Acces Control
+IEEE, Institute of Electrical and Electronics Engineers
+GAP, Generic Acces Profile
+GATT, Generic Attribute Profile
+ATT, Attribute
+UV, Ultraviolet
+IR, Infrarood
+ECG, Elektrocardiogram
+Rx, Recieve
+Tx, Transmit
+RTS, Ready To Send
+CTS, Clear To Send
+DTR, Data Ready
+CS, Chip Select
+MHz, Megahertz
+I\textsuperscript{2}C, Inter-IC bus
+ADC, Analog to Digital Converter
+AFE, Analog Front End
+FET, Field Effect Transistor
+NTC, Negatieve Temperatuurs Coeffici\"ent
+ID, Identificatie
+TI, Texas Instruments
+ARM, Advanced RISC Machines
+RISC, Reduced Instruction Set Computer

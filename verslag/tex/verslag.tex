@@ -1,0 +1,286 @@
+\documentclass[master=elt,masteroption=eo,oneside]{kulemt}
+%\pagestyle{}
+\usepackage{titlesec}
+
+\setup{title={Ontwerp van een quadcoptersturing in VHDL },
+  author={Andries Gert-Jan},
+  promotor={Ing.\ Sammy~Verslype},
+  assessor = {Ing.\ Sammy~Verslype},
+  assistant={Ing.\ Sammy~Verslype}}
+
+% De volgende \setup mag verwijderd worden als geen fiche gewenst is.
+%\setup{filingcard,
+%    translatedtitle={place english translation of title here}, 
+%    udc=621.3,
+%    shortabstract={Hier komt een heel bondig abstract van hooguit 500
+%    woorden. \LaTeX\ commando's mogen hier gebruikt worden. Blanco lijnen
+%    (of het commando \texttt{\string\pa r}) zijn wel niet toegelaten!
+%    \endgraf \lipsum[2]}}
+
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{upquote}
+\usepackage{gensymb}
+\usepackage{eurosym}
+\usepackage{array}
+\usepackage{bytefield}
+\usepackage{siunitx}
+\usepackage{xcolor}
+%\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{booktabs,colortbl, array}
+\usepackage{pgfplotstable}
+\usepackage{csquotes}
+\usepackage{environ}
+\usepackage[bottom]{footmisc}
+\usepackage{pdfpages}
+\usepackage{array,tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{float}
+
+\lstdefinelanguage{VHDL}{
+  morekeywords=[1]{
+    library,use,all,entity,is,port,in,out,end,architecture,of,
+    begin,and,or,Not,downto,ALL
+  },
+  morekeywords=[2]{
+    STD_LOGIC_VECTOR,STD_LOGIC,IEEE,STD_LOGIC_1164,
+    NUMERIC_STD,STD_LOGIC_ARITH,STD_LOGIC_UNSIGNED,std_logic_vector,
+    std_logic
+  },
+  morecomment=[l]--
+}
+
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{STD}{violet}
+\colorlet{comment}{blue}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \footnotesize \ttfamily,
+  keywordstyle = [1]\color{keyword}\bfseries,
+  keywordstyle = [2]\color{STD}\bfseries,
+  commentstyle = \color{comment}
+  breaklines=true,                % sets automatic line breaking
+  tabsize=3                                % sets default tabsize to 2 spaces
+}
+
+
+\newenvironment{conditions*}
+  {\par\vspace{\abovedisplayskip}\noindent
+   \tabularx{\columnwidth}{>{$}l<{$} @{\ : } >{\raggedright\arraybackslash}X}}
+  {\endtabularx\par\vspace{\belowdisplayskip}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\newsavebox{\measure@tikzpicture}
+\NewEnviron{scaletikzpicturetowidth}[1]{%
+  \def\tikz@width{#1}%
+  \def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
+  \BODY
+  \end{lrbox}%
+  \pgfmathparse{#1/\wd\measure@tikzpicture}%
+  \edef\tikzscale{\pgfmathresult}%
+  \BODY
+}
+\makeatother
+
+\newcommand{\getsizes}[2]% width, height
+{   \path (current bounding box.south west);
+    \pgfgetlastxy{\xsw}{\ysw}
+    \path (current bounding box.north east);
+    \pgfgetlastxy{\xne}{\yne}
+    \pgfmathsetmacro{\picwidth}{(\xne-\xsw)/28.453}
+    \pgfmathsetmacro{\picheight}{(\yne-\ysw)/28.453}
+    \pgfmathsetmacro{\picxscale}{#1/\picwidth}
+    \pgfmathsetmacro{\picyscale}{#2/\picheight}
+    \xdef\xsca{\picxscale}
+    \xdef\ysca{\picyscale}
+}
+
+\newcommand{\xyscaledtikz}[3]% draw commands, width, height
+{ \smash{\vphantom{
+    \begin{tikzpicture}
+        #1
+        \getsizes{#2}{#3}
+    \end{tikzpicture}
+    }}
+    \begin{tikzpicture}[xscale=\xsca,yscale=\ysca]
+        #1
+    \end{tikzpicture}
+}
+
+\pgfplotsset{compat=1.8}
+
+%%listings
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+%%tables
+\definecolor{rulecolor}{RGB}{0,0,0}
+\definecolor{tableheadcolor}{gray}{0.92}
+
+%%commands
+\newcommand{\topline}{ 
+        \arrayrulecolor{rulecolor}\specialrule{0.1em}{\abovetopsep}{0pt}
+        \arrayrulecolor{tableheadcolor}\specialrule{\belowrulesep}{0pt}{0pt}
+        \arrayrulecolor{rulecolor}}
+
+\newcommand{\midtopline}{ 
+        \arrayrulecolor{tableheadcolor}\specialrule{\aboverulesep}{0pt}{0pt}
+        \arrayrulecolor{rulecolor}\specialrule{\lightrulewidth}{0pt}{0pt}
+        \arrayrulecolor{white}\specialrule{\belowrulesep}{0pt}{0pt}
+        \arrayrulecolor{rulecolor}}
+
+\newcommand{\bottomline}{ 
+        \arrayrulecolor{white}\specialrule{\aboverulesep}{0pt}{0pt}
+        \arrayrulecolor{rulecolor} 
+        \specialrule{\heavyrulewidth}{0pt}{\belowbottomsep}}
+
+\newcommand{\midheader}[2]{
+        \midrule\topmidheader{#1}{#2}}
+
+\newcommand\topmidheader[2]{\multicolumn{#1}{c}{\textsc{#2}}\\
+                \addlinespace[0.5ex]}
+
+\newcolumntype{C}{>{\raggedright\arraybackslash}p{7cm}}
+\newcolumntype{D}{>{\raggedright\arraybackslash}p{3cm}}
+\newcolumntype{A}{>{\raggedright\arraybackslash}p{2cm}}
+\newcolumntype{B}{>{\raggedright\arraybackslash}p{4cm}}
+\newcolumntype{F}{>{\raggedright\arraybackslash}p{0.20\textwidth}}
+\newcolumntype{G}{>{\raggedright\arraybackslash}p{0.15\textwidth}}
+\newcolumntype{I}{>{\raggedright\arraybackslash}p{0.25\textwidth}}
+\newcolumntype{J}{>{\raggedright\arraybackslash}p{0.35\textwidth}}
+\newcolumntype{K}{>{\raggedright\arraybackslash}p{0.45\textwidth}}
+
+%%Tables
+\pgfplotstableset{
+        normal/.style ={
+        header=true,
+        string type,
+        %font=\addfontfeature{Numbers={Monospaced}}\small,
+        column type=l,
+        every odd row/.style={
+            before row=
+        },
+        every head row/.style={
+            before row={\topline\rowcolor{tableheadcolor}},
+            after row={\midtopline}
+        },
+        every last row/.style={
+            after row=\bottomline
+        },
+        col sep=&,
+        row sep=\\
+    },
+    center/.style ={
+        header=true,
+        string type,
+        %font=\addfontfeature{Numbers={Monospaced}}\small,
+        column type=c,
+        every odd row/.style={
+            before row=
+        },
+        every head row/.style={
+            before row={\topline\rowcolor{tableheadcolor}},
+            after row={\midtopline}
+        },
+        every last row/.style={
+            after row=\bottomline
+        },
+        col sep=&,
+        row sep=\\
+    }
+}
+
+
+% monospaced font with bold variant
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Kies de fonts voor de gewone tekst, bv. Latin Modern
+%\setup{font=lm} %T en nog een aantal andere letters zijn kleiner dan andere, dit trekt echt op niets in bvb 'NTC'. Zonder die instelling is er eensgezindheid onder de hoofdletters
+\setlength{\parskip}{1em}
+\setlength\parindent{0pt}
+
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-40pt}{10pt}
+
+
+
+%%%%%%%
+% Om wat tekst te genereren wordt hier het lipsum pakket gebruikt.
+% Bij een echte masterproef heb je dit natuurlijk nooit nodig!
+\IfFileExists{lipsum.sty}%
+ {\usepackage{lipsum}\setlipsumdefault{11-13}}%
+ {\newcommand{\lipsum}[1][11-13]{\par Hier komt wat tekst: lipsum ##1.\par}}
+%%%%%%%
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{preface}
+%  \par Het tot stand komen van deze masterproef is het resultaat van een samenwerking tussen heel wat mensen. Van deze gelegenheid wensen wij gebruik te maken om alle personen te bedanken die rechtstreeks en onrechtstreeks bijgedragen hebben aan het tot stand komen van deze masterproef. 
+%  \par Eerst en vooral willen wij alle docenten bedanken,  betrokken bij onze opleiding, meerbepaald de docenten van de afdeling electronica-ICT. In het bijzonder willen wij ook onze buitenpromotor, Crombez Pieter, bedanken voor de uitstekende begeleiding  van onze masterproef. Verder bedanken wij ook onze binnenpromotor Verslype Sammy en opleidingshoofd Peuteman Joan. Tot slot bedanken wij ook onze ouders en familie om ons de kans te geven deze opleiding te volgen. 
+%\end{preface}
+%----------------------------------------------------------------------------------------------------------------------------------------------------
+
+\tableofcontents*
+
+%-------------------------
+\begin{abstract}
+    \par In dit projectlab wordt een quadcoptersturing ontworpen op een FGPA. Aan de hand van een PID regeling wordt de stabilisatie voorzien rond de drie bewegingsassen van de quadcopter. Vanwege de beperkte hoeveelheid resources die op de FPGA aanwezig zijn, dient er in het hardware ontwerp rekening gehouden te worden met deze beperking. Verschillende iteraties en methodieken worden ondernomen om de benodigde resources voor deze PID regeling tot een minima te beperken. Zo werd onderzocht of er gebruik gemaakt kan worden van de snelle DSP48 slices. Daarnaast wordt ook een implementatie gemaakt aan de hand van de IP CoreGenerator multiplier. 
+
+    \par Naast het ontwerpen van een PID controller worden ook verschillende andere systeemcomponenten ontworpen. Een PWM generator zal de BLDC motoren voorzien van een gepast PWM signaal dat voldoet aan de frequentievoorschriften van de motorfabrikant. Om het juiste signaal voor elke motor te genereren, wordt een motormixing unit ontworpen die het motormixingalgoritme implementeert. 
+
+    \par Communicatie met de buitenwereld wordt voorzien door middel van een SPI slave interface. Deze interface wordt gebruikt om sensorwaarden te ontvangen, maar laat de gebruiker ook toe bepaalde registers uit te lezen of in te stellen.
+
+    \par Alle hardware wordt gesimuleerd en vervolgens getest op een FPGA. Via Matlab en Simulink worden vooraf de nodige berekeningen en simulaties uitgevoerd die als basis voor het FPGA design dienen.
+
+    \par Naast de hardware wordt ook het quadcopterframe volledig ontworpen. Dit frame wordt zodanig ontworpen dat het uit verschillende onderdelen bestaat die door een 3D printer vervaardigd kunnen worden.
+\end{abstract}
+%-------------------------
+
+%include the symbols and abbreviations list from different file to keep it all organized
+\include{SymbolsAbbs/SymbolsAndAbbreviations}
+
+% Nu begint de eigenlijke tekst
+\mainmatter
+
+\include{Inleiding/Inleiding}
+\include{Vooronderzoek/Vooronderzoek}
+\include{Implementatie/Implementatie}
+%\include{Chapter_3/hfdst-3}
+%\include{Chapter_4/hfdst-4}
+%\include{Chapter_5/vooronderzoek}
+\include{Besluit/besluit}
+
+
+% Indien er bijlagen zijn:
+\appendixpage*          % indien gewenst
+\appendix
+\include{Appendix/app-A}
+% ... en zo verder tot
+%\include{Appendix/app-n}
+
+\backmatter
+% Na de bijlagen plaatst men nog de bibliografie.
+% Je kan de  standaard "abbrv" bibliografiestijl vervangen door een andere.
+%\bibliographystyle{abbrv}
+%\bibliography{referenties}
+
+\end{document}
+

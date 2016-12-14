@@ -1,0 +1,6 @@
+\degree C, graden Celcius
+V, Volt
+A, Ampere
+s, Seconde
+g, zwaarteveldsterkte
+\pi, Pi: 3.141592
